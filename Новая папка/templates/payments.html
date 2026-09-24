@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Оплаты{% endblock %}
+{% block content %}
+<h1>Оплаты</h1>
+<p>Всего проведено: <b>{{ '%.2f'|format(total) }} ₽</b></p>
+<table class="table">
+<thead><tr><th>Дата</th><th>Заказ</th><th>Клиент</th><th>Сумма</th>
+<th>Способ</th><th>Тип</th></tr></thead>
+<tbody>
+{% for p in payments %}
+<tr>
+  <td>{{ p.created_at[:16] if p.created_at else '' }}</td>
+  <td><a href="{{ url_for('orders.detail', oid=p.order_id) }}">{{ p.order_number or '—' }}</a></td>
+  <td>{{ p.client_name or '—' }}</td>
+  <td>{{ '%.2f'|format(p.amount) }} ₽</td>
+  <td>{{ p.method }}</td>
+  <td>{{ p.kind }}</td>
+</tr>
+{% else %}
+<tr><td colspan="6" class="muted">Оплат нет</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
