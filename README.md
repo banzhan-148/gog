@@ -22,7 +22,6 @@ pip install -r requirements-dev.txt   # для тестов
 # опционально: скопировать .env.example → .env
 python run.py
 # → http://localhost:5000
-# DEV-логины: admin/admin123, reception/reception123, worker/worker123, director/director123
 App factory
 from run import create_app
 app = create_app('development')   # development | testing | production
